@@ -90,7 +90,7 @@ export function About() {
                 alt="Photo de profil"
                 width={350}
                 height={400}
-                className="rounded-lg shadow-lg border-2 border-foreground/10 object-cover"
+                className="rounded-lg shadow-lg border-2 border-foreground/10 object-cover dark:grayscale"
                 priority
               />
             </div>

@@ -121,6 +121,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
   }
 }
 
@@ -206,5 +207,65 @@
   /* Glow effect on hover */
   .hover-glow {
     @apply transition-all duration-200 hover:shadow-lg;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.1);
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(var(--foreground), 0.2);
+  }
+
+  .bg-mesh {
+    background-image: 
+      radial-gradient(at 0% 0%, oklch(0.7 0.2 250 / 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, oklch(0.7 0.2 300 / 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, oklch(0.7 0.2 350 / 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, oklch(0.7 0.2 200 / 0.15) 0px, transparent 50%);
+  }
+
+  @keyframes aurora {
+    from {
+      background-position: 50% 50%, 50% 50%;
+    }
+    to {
+      background-position: 350% 50%, 350% 50%;
+    }
+  }
+
+  .animate-aurora {
+    animation: aurora 60s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(var(--primary), 0.1),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
   }
 }

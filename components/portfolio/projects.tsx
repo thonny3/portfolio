@@ -247,6 +247,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 export function Projects() {
   const [isVisible, setIsVisible] = useState(false)
+  const [showAll, setShowAll] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -263,6 +264,8 @@ export function Projects() {
 
     return () => observer.disconnect()
   }, [])
+
+  const displayedProjects = showAll ? projects : projects.slice(0, 3)
 
   return (
     <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
@@ -285,10 +288,25 @@ export function Projects() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
+          {displayedProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
+
+        {/* View More Button */}
+        {projects.length > 3 && (
+          <div className="mt-16 flex justify-center">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="group relative px-8 py-3 bg-foreground text-background font-medium rounded-full overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95"
+            >
+              <span className="relative z-10">
+                {showAll ? 'Voir moins' : 'Voir plus'}
+              </span>
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   )

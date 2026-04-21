@@ -2,26 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react'
 import {
-  SiReact,
-  SiNextdotjs,
-  SiTypescript,
-  SiTailwindcss,
-  SiHtml5,
-  SiJavascript,
-  SiPhp,
-  SiPython,
-  SiNodedotjs,
-  SiExpress,
-  SiPostgresql,
-  SiMongodb,
-  SiMysql,
-  SiGit,
-  SiDocker,
-  SiVercel,
-  SiGithub,
-  SiFirebase,
-  SiSupabase,
-  SiWebpack,
+  SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiHtml5, SiJavascript,
+  SiPhp, SiPython, SiNodedotjs, SiExpress, SiPostgresql, SiMongodb,
+  SiMysql, SiGit, SiDocker, SiVercel, SiGithub, SiFirebase, SiSupabase, SiWebpack,
 } from 'react-icons/si'
 
 interface SkillCategory {
@@ -29,6 +12,8 @@ interface SkillCategory {
   skills: Array<{
     name: string
     icon: React.ReactNode
+    color: string
+    level?: string
   }>
 }
 
@@ -36,75 +21,60 @@ const skillCategories: SkillCategory[] = [
   {
     name: 'Langages de programmation',
     skills: [
-      { name: 'TypeScript', icon: <SiTypescript className="w-8 h-8" /> },
-      { name: 'JavaScript', icon: <SiJavascript className="w-8 h-8" /> },
-      { name: 'PHP', icon: <SiPhp className="w-8 h-8" /> },
-      { name: 'Python', icon: <SiPython className="w-8 h-8" /> },
-      { name: 'HTML/CSS', icon: <SiHtml5 className="w-8 h-8" /> },
+      { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6', level: 'Expert' },
+      { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E', level: 'Expert' },
+      { name: 'PHP', icon: <SiPhp />, color: '#777BB4', level: 'Intermédiaire' },
+      { name: 'Python', icon: <SiPython />, color: '#3776AB', level: 'Intermédiaire' },
     ],
   },
   {
     name: 'Front-end',
     skills: [
-      { name: 'React', icon: <SiReact className="w-8 h-8" /> },
-      { name: 'Next.js', icon: <SiNextdotjs className="w-8 h-8" /> },
-      { name: 'Tailwind CSS', icon: <SiTailwindcss className="w-8 h-8" /> },
+      { name: 'React.js', icon: <SiReact />, color: '#61DAFB', level: 'Expert' },
+      { name: 'Next.js', icon: <SiNextdotjs />, color: '#000000', level: 'Expert' },
+      { name: 'Tailwind CSS', icon: <SiTailwindcss />, color: '#06B6D4', level: 'Expert' },
+      { name: 'HTML5 / CSS3', icon: <SiHtml5 />, color: '#E34F26', level: 'Expert' },
     ],
   },
   {
     name: 'Back-end',
     skills: [
-      { name: 'Node.js', icon: <SiNodedotjs className="w-8 h-8" /> },
-      { name: 'Express', icon: <SiExpress className="w-8 h-8" /> },
-      { name: 'API REST', icon: <SiWebpack className="w-8 h-8" /> },
+      { name: 'Node.js', icon: <SiNodedotjs />, color: '#339933', level: 'Avancé' },
+      { name: 'Express.js', icon: <SiExpress />, color: '#000000', level: 'Avancé' },
+      { name: 'API REST', icon: <SiWebpack />, color: '#8DD6F9', level: 'Avancé' },
     ],
   },
   {
     name: 'SGBD',
     skills: [
-      { name: 'PostgreSQL', icon: <SiPostgresql className="w-8 h-8" /> },
-      { name: 'MongoDB', icon: <SiMongodb className="w-8 h-8" /> },
-      { name: 'MySQL', icon: <SiMysql className="w-8 h-8" /> },
-    ],
-  },
-  {
-    name: 'Outils & autres',
-    skills: [
-      { name: 'Git', icon: <SiGit className="w-8 h-8" /> },
-      { name: 'Docker', icon: <SiDocker className="w-8 h-8" /> },
-      { name: 'Vercel', icon: <SiVercel className="w-8 h-8" /> },
-      { name: 'GitHub', icon: <SiGithub className="w-8 h-8" /> },
-      { name: 'Firebase', icon: <SiFirebase className="w-8 h-8" /> },
-      { name: 'Supabase', icon: <SiSupabase className="w-8 h-8" /> },
+      { name: 'PostgreSQL', icon: <SiPostgresql />, color: '#4169E1', level: 'Avancé' },
+      { name: 'MongoDB', icon: <SiMongodb />, color: '#47A248', level: 'Avancé' },
+      { name: 'MySQL', icon: <SiMysql />, color: '#00758F', level: 'Avancé' },
     ],
   },
 ]
 
-function SkillBadge({
-  skill,
-  index,
-  isVisible,
-}: {
-  skill: { name: string; icon: React.ReactNode }
-  index: number
-  isVisible: boolean
-}) {
+function SkillBadge({ skill, index, isVisible }: { skill: SkillCategory['skills'][number], index: number, isVisible: boolean }) {
   return (
     <div
-      className={`transition-all duration-500 ${
-        isVisible
-          ? 'opacity-100 scale-100'
-          : 'opacity-0 scale-95'
+      className={`group relative p-5 bg-card border border-border rounded-2xl hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
-      style={{
-        transitionDelay: isVisible ? `${index * 50}ms` : '0ms',
-      }}
+      style={{ transitionDelay: `${index * 50}ms` }}
     >
-      <div className="flex flex-col items-center gap-2 p-4 bg-gray-50 dark:bg-gray-900 text-foreground rounded-lg border border-gray-200 dark:border-gray-800 hover:border-foreground/50 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 cursor-default group">
-        <div className="text-foreground/70 group-hover:text-foreground transition-colors">
-          {skill.icon}
+      <div className="flex items-center gap-4">
+        <div 
+          className="p-3 bg-foreground/5 rounded-xl transition-all duration-300 transform group-hover:rotate-6 flex items-center justify-center"
+          style={{ color: skill.color }}
+        >
+          <div className="w-6 h-6">{skill.icon}</div>
         </div>
-        <span className="text-xs font-medium text-center">{skill.name}</span>
+        <div>
+          <h4 className="text-sm font-bold text-foreground tracking-tight">{skill.name}</h4>
+          {skill.level && (
+            <span className="text-[10px] font-black uppercase tracking-widest text-primary/60">{skill.level}</span>
+          )}
+        </div>
       </div>
     </div>
   )
@@ -120,50 +90,41 @@ export function Skills() {
         setIsVisible(true)
         observer.unobserve(entry.target)
       }
-    })
+    }, { threshold: 0.1 })
 
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
-
+    if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
   }, [])
 
   return (
-    <section
-      id="skills"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950"
-    >
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div
-          ref={ref}
-          className={`mb-16 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
-            Compétences
+    <section id="skills" className="py-24 bg-background relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div ref={ref} className={`mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 bg-primary/10 rounded-full border border-primary/20">
+             <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+             <span className="text-[10px] font-black uppercase tracking-widest text-primary">Expertise</span>
+          </div>
+          <h2 className="text-4xl sm:text-6xl font-bold text-foreground mb-6 tracking-tight">
+            Compétences <span className="text-foreground/40 font-light">Techniques</span>
           </h2>
-          <p className="text-lg text-foreground/60 max-w-2xl">
-            Maîtrise des technologies modernes et des meilleures pratiques
-            de développement web.
+          <p className="text-lg text-foreground/50 max-w-2xl leading-relaxed">
+            Un arsenal technologique moderne pour concevoir des produits robustes, 
+            scalables et centrés sur l'expérience utilisateur.
           </p>
         </div>
 
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {skillCategories.map((category, categoryIndex) => (
-            <div key={category.name}>
-              <h3 className="text-xl font-bold text-foreground mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+          {skillCategories.map((category, catIndex) => (
+            <div key={category.name} className="space-y-6">
+              <h3 className="text-xs font-black uppercase tracking-[0.4em] text-foreground/30 pl-2">
                 {category.name}
               </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                {category.skills.map((skill, skillIndex) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {category.skills.map((skill, sIndex) => (
                   <SkillBadge
                     key={skill.name}
                     skill={skill}
-                    index={categoryIndex * 6 + skillIndex}
+                    index={catIndex * 4 + sIndex}
                     isVisible={isVisible}
                   />
                 ))}
@@ -172,6 +133,9 @@ export function Skills() {
           ))}
         </div>
       </div>
+      
+      {/* Background Decor */}
+      <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-0" />
     </section>
   )
 }

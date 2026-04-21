@@ -29,15 +29,24 @@ export const metadata: Metadata = {
   },
 }
 
+import { ThemeProvider } from '@/components/theme-provider'
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr" className="bg-background">
+    <html lang="fr" suppressHydrationWarning className="bg-background">
       <body className="font-sans antialiased bg-background text-foreground">
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { Briefcase, Calendar } from 'lucide-react'
 
 interface Experience {
   id: number
@@ -8,6 +9,7 @@ interface Experience {
   position: string
   period: string
   description: string
+  isLatest?: boolean
 }
 
 const experiences: Experience[] = [
@@ -16,89 +18,59 @@ const experiences: Experience[] = [
     company: 'Entreprise Système Numérique UN-IT, Fianarantsoa',
     position: 'Développeur Front-End',
     period: '2025 - Présent',
-    description:
-      "Développement et amélioration continue d'applications web métier. Conception d'interfaces performantes et accessibles avec React.js/Next.js, optimisation de l'expérience utilisateur et collaboration étroite avec l'équipe technique.",
+    isLatest: true,
+    description: "Développement et amélioration continue d'applications web métier. Conception d'interfaces performantes et accessibles avec React.js/Next.js, optimisation de l'expérience utilisateur.",
   },
   {
     id: 2,
     company: 'Entreprise Système Numérique UN-IT, Fianarantsoa',
     position: 'Développeur Front-End',
     period: '2024 - 2025',
-    description:
-      "Participation au développement de plateformes web internes et clients. Intégration d'API REST, création de composants UI réutilisables et mise en place de bonnes pratiques de qualité de code en équipe Agile/Scrum.",
+    description: "Participation au développement de plateformes web. Intégration d'API REST, création de composants UI réutilisables et mise en place de bonnes pratiques Agile.",
   },
   {
     id: 3,
-    company: 'Entreprise Système Numérique UN-IT, Fianarantsoa',
-    position: 'Développeur Front-End (Stage de Licence en Informatique)',
-    period: '2023 - 2024',
-    description:
-      "Développement d'interfaces web modernes, responsives et accessibles avec React.js, Next.js et Vue.js. Création de composants réutilisables, maintenance d'un code clair et performant, intégration d'API REST et participation aux pratiques Agile/Scrum ainsi qu'aux revues de code. Thème: conception et réalisation d'une plateforme de consultation en ligne incluant prise de rendez-vous, consultation à distance (visioconférence/chat) et gestion des utilisateurs (patients/professionnels). Technologies utilisées: React.js, Node.js, MySQL, Tailwind CSS, API REST et WebSockets.",
-  },
-  {
-    id: 4,
-    company: 'Projet académique encadré (Licence Informatique)',
+    company: 'UN-IT, Fianarantsoa (Stage)',
     position: 'Stagiaire Développeur Front-End',
-    period: '2023',
-    description:
-      "Réalisation d'interfaces web responsives et ergonomiques, connexion aux services backend et validation des parcours utilisateurs. Focus sur la qualité visuelle, la performance et l'accessibilité.",
-  },
-  {
-    id: 5,
-    company: 'Projets personnels et universitaires',
-    position: 'Développeur Web Front-End (Junior)',
-    period: '2022 - 2023',
-    description:
-      "Conception de mini-applications web pour renforcer les bases en JavaScript, React et intégration API. Structuration de code maintenable, versionning avec Git/GitHub et déploiement de projets de démonstration.",
-  },
-  {
-    id: 6,
-    company: 'Stage d\'initiation (Informatique)',
-    position: 'Stagiaire Développeur Web',
-    period: '2022',
-    description:
-      "Première expérience professionnelle en développement web: participation à la création de pages dynamiques, correction de bugs UI et découverte des méthodes de travail en équipe sur des projets réels.",
+    period: '2023 - 2024',
+    description: "Conception d'une plateforme de consultation en ligne. Utilisation de React.js, Node.js et MySQL pour la gestion des rendez-vous et visioconférences.",
   },
 ]
 
-function ExperienceItem({
-  experience,
-  index,
-  isVisible,
-}: {
-  experience: Experience
-  index: number
-  isVisible: boolean
-}) {
+function ExperienceItem({ experience, index, isVisible }: { experience: Experience, index: number, isVisible: boolean }) {
   return (
     <div
-      className={`relative transition-all duration-500 ${
-        isVisible
-          ? 'opacity-100 translate-x-0'
-          : 'opacity-0 translate-x-8'
+      className={`relative pl-8 sm:pl-12 pb-12 last:pb-0 transition-all duration-700 ${
+        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
       }`}
-      style={{
-        transitionDelay: isVisible ? `${index * 100}ms` : '0ms',
-      }}
+      style={{ transitionDelay: `${index * 150}ms` }}
     >
-      {/* Timeline dot */}
-      <div className="hidden sm:block absolute left-[-12px] top-2 w-6 h-6 bg-foreground rounded-full border-4 border-background dark:border-gray-950" />
+      {/* Connector Line */}
+      <div className="absolute left-0 sm:left-[1.35rem] top-0 bottom-0 w-[2px] bg-foreground/10 last:bg-transparent" />
+      
+      {/* Dot */}
+      <div className={`absolute left-[-5px] sm:left-[1rem] top-1.5 w-3 h-3 rounded-full border-2 border-background transition-colors duration-500 ${
+        experience.isLatest ? 'bg-primary border-primary scale-125' : 'bg-foreground/20 border-foreground/40'
+      }`} />
 
-      <div className="bg-background border border-gray-200 dark:border-gray-800 rounded-lg p-6 hover:border-gray-400 dark:hover:border-gray-600 transition-all duration-200 sm:ml-4">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
-          <h3 className="text-xl font-bold text-foreground">
-            {experience.position}
-          </h3>
-          <span className="text-sm text-foreground/60 font-medium">
-            {experience.period}
-          </span>
+      <div className="group relative bg-card/40 backdrop-blur-sm border border-border p-6 rounded-2xl hover:border-primary/30 hover:bg-card transition-all duration-300">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+          <div>
+            <h3 className="text-xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
+              {experience.position}
+            </h3>
+            <div className="flex items-center gap-2 mt-1 text-foreground/40">
+              <Briefcase size={14} />
+              <span className="text-xs font-bold uppercase tracking-widest">{experience.company}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 px-3 py-1 bg-foreground/5 rounded-full border border-foreground/5 whitespace-nowrap">
+            <Calendar size={12} className="text-primary" />
+            <span className="text-[10px] font-black uppercase tracking-widest text-foreground/60">{experience.period}</span>
+          </div>
         </div>
 
-        <p className="text-foreground/70 font-semibold mb-3">
-          {experience.company}
-        </p>
-
-        <p className="text-foreground/60 leading-relaxed">
+        <p className="text-foreground/50 text-sm leading-relaxed max-w-2xl">
           {experience.description}
         </p>
       </div>
@@ -116,35 +88,26 @@ export function Experience() {
         setIsVisible(true)
         observer.unobserve(entry.target)
       }
-    })
+    }, { threshold: 0.1 })
 
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
-
+    if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
   }, [])
 
   return (
-    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div
-          ref={ref}
-          className={`mb-16 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
-            Expérience
+    <section id="experience" className="py-24 bg-background overflow-hidden">
+      <div className="max-w-4xl mx-auto px-6">
+        <div ref={ref} className={`mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 bg-primary/10 rounded-full border border-primary/20">
+             <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+             <span className="text-[10px] font-black uppercase tracking-widest text-primary">Carrière</span>
+          </div>
+          <h2 className="text-4xl sm:text-6xl font-bold text-foreground mb-6 tracking-tight">
+            Parcours <span className="text-foreground/40 font-light">Professionnel</span>
           </h2>
-          <p className="text-lg text-foreground/60">
-            Mon parcours professionnel et mes expériences en développement web.
-          </p>
         </div>
 
-        {/* Timeline */}
-        <div className="relative border-l-2 border-gray-200 dark:border-gray-800 sm:border-l-0 pl-8 sm:pl-0">
+        <div className="space-y-0">
           {experiences.map((exp, index) => (
             <ExperienceItem
               key={exp.id}
