@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { Mail, Linkedin, Github, Facebook } from 'lucide-react'
+import emailjs from '@emailjs/browser'
+import Swal from 'sweetalert2'
 
 export function Contact() {
   const [isVisible, setIsVisible] = useState(false)
@@ -10,7 +12,7 @@ export function Contact() {
     email: '',
     message: '',
   })
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSending, setIsSending] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -38,21 +40,48 @@ export function Contact() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Simulate form submission
-    console.log('[v0] Form data:', formData)
-    setIsSubmitted(true)
-    setTimeout(() => {
-      setFormData({ name: '', email: '', message: '' })
-      setIsSubmitted(false)
-    }, 3000)
+    setIsSending(true)
+
+    try {
+      const result = await emailjs.send(
+        'service_0moyut1',
+        'template_9kypqym',
+        {
+          from_name: formData.name,
+          reply_to: formData.email,
+          message: formData.message,
+        },
+        'qZ5F9y35WJN_anztg'
+      )
+
+      if (result.status === 200) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Message envoyé !',
+          text: 'Merci de m\'avoir contacté. Je vous répondrai dès que possible.',
+          confirmButtonColor: '#000',
+        })
+        setFormData({ name: '', email: '', message: '' })
+      }
+    } catch (error) {
+      console.error('EmailJS Error:', error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur',
+        text: "Une erreur est survenue lors de l'envoi du message. Veuillez réessayer plus tard.",
+        confirmButtonColor: '#000',
+      })
+    } finally {
+      setIsSending(false)
+    }
   }
 
   const socialLinks = [
     {
       icon: Mail,
-      href: 'mailto:contact@example.com',
+      href: 'mailto:randrianasolothonny3@gmail.com',
       label: 'Email',
     },
     {
@@ -158,10 +187,17 @@ export function Contact() {
 
               <button
                 type="submit"
-                disabled={isSubmitted}
-                className="w-full px-6 py-3 bg-foreground text-background font-semibold rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-50 transition-all duration-200 transform hover:scale-105 active:scale-95"
+                disabled={isSending}
+                className="w-full px-6 py-3 bg-foreground text-background font-semibold rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-50 transition-all duration-200 transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
               >
-                {isSubmitted ? 'Message envoyé ✓' : 'Envoyer'}
+                {isSending ? (
+                  <>
+                    <span className="w-5 h-5 border-2 border-background/30 border-t-background rounded-full animate-spin"></span>
+                    Envoi en cours...
+                  </>
+                ) : (
+                  'Envoyer'
+                )}
               </button>
             </form>
           </div>
