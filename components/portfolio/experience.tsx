@@ -102,8 +102,8 @@ export function Experience() {
              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
              <span className="text-[10px] font-black uppercase tracking-widest text-primary">Carrière</span>
           </div>
-          <h2 className="text-4xl sm:text-6xl font-bold text-foreground mb-6 tracking-tight">
-            Parcours <span className="text-foreground/40 font-light">Professionnel</span>
+          <h2 className="text-4xl sm:text-6xl font-bold text-primary dark:text-foreground mb-6 tracking-tight">
+            Parcours <span className="text-primary/50 dark:text-foreground/40 font-light">Professionnel</span>
           </h2>
         </div>
 

@@ -49,9 +49,17 @@ export function Contact() {
         'service_0moyut1',
         'template_9kypqym',
         {
-          from_name: formData.name,
-          reply_to: formData.email,
+          nom: formData.name,
+          email: formData.email,
           message: formData.message,
+          date: new Date().toLocaleDateString('fr-FR', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          }),
         },
         'qZ5F9y35WJN_anztg'
       )
@@ -61,7 +69,7 @@ export function Contact() {
           icon: 'success',
           title: 'Message envoyé !',
           text: 'Merci de m\'avoir contacté. Je vous répondrai dès que possible.',
-          confirmButtonColor: '#000',
+          confirmButtonColor: '#8ba192',
         })
         setFormData({ name: '', email: '', message: '' })
       }
@@ -71,7 +79,7 @@ export function Contact() {
         icon: 'error',
         title: 'Erreur',
         text: "Une erreur est survenue lors de l'envoi du message. Veuillez réessayer plus tard.",
-        confirmButtonColor: '#000',
+        confirmButtonColor: '#8ba192',
       })
     } finally {
       setIsSending(false)
@@ -111,7 +119,7 @@ export function Contact() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-primary dark:text-foreground mb-4">
             Contact
           </h2>
           <p className="text-lg text-foreground/60">
@@ -188,7 +196,7 @@ export function Contact() {
               <button
                 type="submit"
                 disabled={isSending}
-                className="w-full px-6 py-3 bg-foreground text-background font-semibold rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-50 transition-all duration-200 transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+                className="w-full px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 disabled:opacity-50 transition-all duration-200 transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
               >
                 {isSending ? (
                   <>

@@ -104,8 +104,8 @@ export function Skills() {
              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
              <span className="text-[10px] font-black uppercase tracking-widest text-primary">Expertise</span>
           </div>
-          <h2 className="text-4xl sm:text-6xl font-bold text-foreground mb-6 tracking-tight">
-            Compétences <span className="text-foreground/40 font-light">Techniques</span>
+          <h2 className="text-4xl sm:text-6xl font-bold text-primary dark:text-foreground mb-6 tracking-tight">
+            Compétences <span className="text-primary/50 dark:text-foreground/40 font-light">Techniques</span>
           </h2>
           <p className="text-lg text-foreground/50 max-w-2xl leading-relaxed">
             Un arsenal technologique moderne pour concevoir des produits robustes, 

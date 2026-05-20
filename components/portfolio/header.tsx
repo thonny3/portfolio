@@ -118,8 +118,8 @@ export function Header() {
                 onClick={() => scrollToSection(item.id)}
                 className={`px-4 py-2 text-sm font-medium transition-all duration-300 rounded-xl relative group ${
                   activeSection === item.id 
-                    ? 'text-primary' 
-                    : 'text-foreground/60 hover:text-foreground'
+                    ? 'text-primary dark:text-foreground' 
+                    : 'text-primary/60 dark:text-foreground/60 hover:text-primary dark:hover:text-foreground'
                 }`}
               >
                 {item.label}
@@ -157,13 +157,13 @@ export function Header() {
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-2 text-foreground/70 hover:bg-foreground/5 rounded-xl transition-colors"
+              className="p-2 text-foreground/70 hover:text-primary hover:bg-primary/10 rounded-xl transition-colors"
             >
               {mounted && (resolvedTheme === 'dark' ? <Sun size={20} /> : <Moon size={20} />)}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-foreground/70 hover:bg-foreground/5 rounded-xl transition-colors"
+              className="p-2 text-foreground/70 hover:text-primary hover:bg-primary/10 rounded-xl transition-colors"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -182,8 +182,8 @@ export function Header() {
                 onClick={() => scrollToSection(item.id)}
                 className={`block w-full text-left px-5 py-3.5 text-base font-medium rounded-xl transition-all ${
                   activeSection === item.id
-                    ? 'bg-primary/10 text-primary border border-primary/20'
-                    : 'text-foreground/70 border border-transparent hover:bg-foreground/5 hover:text-foreground'
+                    ? 'bg-primary/10 dark:bg-foreground/10 text-primary dark:text-foreground border border-primary/20 dark:border-foreground/20'
+                    : 'text-primary/70 dark:text-foreground/70 border border-transparent hover:bg-primary/10 dark:hover:bg-foreground/10 hover:text-primary dark:hover:text-foreground'
                 }`}
               >
                 {item.label}

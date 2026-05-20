@@ -64,16 +64,17 @@ export function Hero() {
           <div className="flex flex-wrap gap-6 items-center pt-4">
              <button
               onClick={scrollToProjects}
-              className="px-10 py-4 bg-foreground text-background font-bold rounded-full hover:shadow-2xl hover:shadow-foreground/20 hover:-translate-y-1 transition-all duration-300 flex items-center gap-3 group"
+              className="px-10 py-4 bg-primary text-primary-foreground font-bold rounded-full hover:bg-primary/90 hover:shadow-2xl hover:shadow-primary/25 hover:-translate-y-1 transition-all duration-300 flex items-center gap-3 group"
             >
               Voir les projets
               <ArrowUpRight size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </button>
 
             <a
-              href="/CV_RANDRIANASOLO_Jean_Marc_Thonny.pdf"
-              download
-              className="px-8 py-4 bg-background text-foreground border border-foreground/10 font-bold rounded-full hover:bg-foreground/5 hover:-translate-y-1 transition-all duration-300 flex items-center gap-3 group"
+              href="/CV_RANDRIANASOLO_Jean_Marc_Thonny.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-background text-primary border-2 border-primary font-bold rounded-full hover:bg-primary hover:text-primary-foreground hover:-translate-y-1 transition-all duration-300 flex items-center gap-3 group"
             >
               Mon CV
               <Download size={20} className="group-hover:translate-y-0.5 transition-transform" />
@@ -98,7 +99,7 @@ export function Hero() {
                 src="/thonny.jpeg"
                 alt="Jean Marc Thonny"
                 fill
-                className="object-cover transition-all duration-1000 group-hover:scale-105 dark:grayscale"
+                className="object-cover transition-all duration-1000 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               

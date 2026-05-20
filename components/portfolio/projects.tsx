@@ -128,7 +128,7 @@ const projects: Project[] = [
     title: 'NARUTO - Application JavaScript',
     description: "Projet front-end en JavaScript mettant en pratique manipulation du DOM, interactions dynamiques et structuration de composants UI.",
     technologies: ['JavaScript', 'HTML', 'CSS'],
-    image: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+    image: 'linear-gradient(135deg, #6d8278 0%, #8ba192 100%)',
     link: 'https://github.com/thonny3/NARUTO',
     github: 'https://github.com/thonny3/NARUTO',
   },
@@ -137,7 +137,7 @@ const projects: Project[] = [
     title: 'Projet Python - Scripts et Automatisation',
     description: "Ensemble de scripts et mini-applications Python orientés résolution de problèmes, logique métier et automatisation de tâches.",
     technologies: ['Python'],
-    image: 'linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%)',
+    image: 'linear-gradient(135deg, #8ba192 0%, #6d8278 100%)',
     link: 'https://github.com/thonny3/ProjetPython',
     github: 'https://github.com/thonny3/ProjetPython',
   },
@@ -193,7 +193,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             style={{
               background: project.image.startsWith('linear-gradient')
                 ? project.image
-                : 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+                : 'linear-gradient(135deg, #6d8278 0%, #8ba192 100%)',
             }}
           />
         )}
@@ -277,7 +277,7 @@ export function Projects() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-primary dark:text-foreground mb-4">
             Mes Projets
           </h2>
           <p className="text-lg text-foreground/60 max-w-2xl">
@@ -298,7 +298,7 @@ export function Projects() {
           <div className="mt-16 flex justify-center">
             <button
               onClick={() => setShowAll(!showAll)}
-              className="group relative px-8 py-3 bg-foreground text-background font-medium rounded-full overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95"
+              className="group relative px-8 py-3 bg-primary text-primary-foreground font-medium rounded-full overflow-hidden transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 hover:scale-105 active:scale-95"
             >
               <span className="relative z-10">
                 {showAll ? 'Voir moins' : 'Voir plus'}

@@ -34,7 +34,7 @@ export function About() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-8">
+          <h2 className="text-4xl sm:text-5xl font-bold text-primary dark:text-foreground mb-8">
             À propos
           </h2>
 
@@ -90,7 +90,7 @@ export function About() {
                 alt="Photo de profil"
                 width={350}
                 height={400}
-                className="rounded-lg shadow-lg border-2 border-foreground/10 object-cover dark:grayscale"
+                className="rounded-lg shadow-lg border-2 border-foreground/10 object-cover"
                 priority
               />
             </div>
