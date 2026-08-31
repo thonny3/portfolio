@@ -2,7 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { ExternalLink, Github } from 'lucide-react'
+import { ExternalLink, Github, ChevronDown, ChevronUp, Lock, Sparkles } from 'lucide-react'
+
+type Category = 'pro' | 'perso'
 
 interface Project {
   id: number
@@ -12,6 +14,7 @@ interface Project {
   image: string
   link: string
   github?: string
+  category: Category
 }
 
 const projects: Project[] = [
@@ -23,6 +26,7 @@ const projects: Project[] = [
     image: '/crm.PNG',
     link: '#',
     github: '#',
+    category: 'pro',
   },
   {
     id: 2,
@@ -31,7 +35,8 @@ const projects: Project[] = [
     technologies: ['Next.js', 'React', 'JavaScript', 'Tailwind CSS'],
     image: '/isalo.PNG',
     link: '#',
-    github: '#',
+    github: 'https://github.com/thonny3/fornt-isalo-dev',
+    category: 'pro',
   },
   {
     id: 3,
@@ -41,6 +46,7 @@ const projects: Project[] = [
     image: '/siteebax.PNG',
     link: '#',
     github: '#',
+    category: 'pro',
   },
   {
     id: 4,
@@ -50,6 +56,7 @@ const projects: Project[] = [
     image: '/soummision.PNG',
     link: '#',
     github: '#',
+    category: 'pro',
   },
   {
     id: 5,
@@ -59,6 +66,7 @@ const projects: Project[] = [
     image: '/marcia.png',
     link: '#',
     github: '#',
+    category: 'pro',
   },
   {
     id: 6,
@@ -67,7 +75,8 @@ const projects: Project[] = [
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
     image: '/myjalako-web.png',
     link: '#',
-    github: '#',
+    github: 'https://github.com/thonny3/front-myjalako',
+    category: 'pro',
   },
   {
     id: 7,
@@ -76,7 +85,8 @@ const projects: Project[] = [
     technologies: ['React Native', 'JavaScript', 'API REST'],
     image: '/myjalako-mobile.png',
     link: '#',
-    github: '#',
+    github: 'https://github.com/thonny3/mobile_myjalako',
+    category: 'pro',
   },
   {
     id: 8,
@@ -85,7 +95,8 @@ const projects: Project[] = [
     technologies: ['Next.js', 'React', 'TypeScript', 'Chart.js'],
     image: '/budget-pro.png',
     link: '#',
-    github: '#',
+    github: 'https://github.com/thonny3/suivi_buget_perso',
+    category: 'pro',
   },
   {
     id: 9,
@@ -94,7 +105,8 @@ const projects: Project[] = [
     technologies: ['Next.js', 'React', 'Tailwind CSS', 'API REST'],
     image: '/gestion-stock.png',
     link: '#',
-    github: '#',
+    github: 'https://github.com/thonny3/gestion_magasin',
+    category: 'pro',
   },
   {
     id: 10,
@@ -103,7 +115,8 @@ const projects: Project[] = [
     technologies: ['Next.js', 'React', 'JavaScript', 'Local Storage'],
     image: '/budget-family.png',
     link: '#',
-    github: '#',
+    github: 'https://github.com/thonny3/budget-family',
+    category: 'pro',
   },
   {
     id: 11,
@@ -112,7 +125,8 @@ const projects: Project[] = [
     technologies: ['Next.js', 'React', 'TypeScript', 'API REST'],
     image: '/formation-en-ligne.png',
     link: '#',
-    github: '#',
+    github: 'https://github.com/thonny3/formation-Front',
+    category: 'pro',
   },
   {
     id: 12,
@@ -122,30 +136,189 @@ const projects: Project[] = [
     image: '/backend-job-mg.png',
     link: '#',
     github: '#',
+    category: 'pro',
   },
   {
     id: 13,
     title: 'NARUTO - Application JavaScript',
     description: "Projet front-end en JavaScript mettant en pratique manipulation du DOM, interactions dynamiques et structuration de composants UI.",
     technologies: ['JavaScript', 'HTML', 'CSS'],
-    image: 'linear-gradient(135deg, #6d8278 0%, #8ba192 100%)',
+    image: '',
     link: 'https://github.com/thonny3/NARUTO',
     github: 'https://github.com/thonny3/NARUTO',
+    category: 'perso',
   },
   {
     id: 14,
     title: 'Projet Python - Scripts et Automatisation',
     description: "Ensemble de scripts et mini-applications Python orientés résolution de problèmes, logique métier et automatisation de tâches.",
     technologies: ['Python'],
-    image: 'linear-gradient(135deg, #8ba192 0%, #6d8278 100%)',
+    image: '',
     link: 'https://github.com/thonny3/ProjetPython',
     github: 'https://github.com/thonny3/ProjetPython',
+    category: 'perso',
   },
 ]
 
+const INITIAL_COUNT = 6
+
+function TechPills({ technologies, limit = 4 }: { technologies: string[]; limit?: number }) {
+  const visible = technologies.slice(0, limit)
+  const rest = technologies.length - visible.length
+  return (
+    <div className="flex flex-wrap gap-2">
+      {visible.map((tech) => (
+        <span
+          key={tech}
+          className="text-xs px-3 py-1 bg-muted text-foreground/70 rounded-full border border-border"
+        >
+          {tech}
+        </span>
+      ))}
+      {rest > 0 && (
+        <span className="text-xs px-3 py-1 bg-primary/10 text-primary rounded-full border border-primary/20 font-medium">
+          +{rest}
+        </span>
+      )}
+    </div>
+  )
+}
+
+function ProjectThumb({ project }: { project: Project }) {
+  const [imageError, setImageError] = useState(false)
+  const hasImage = Boolean(project.image) && !imageError
+
+  if (hasImage) {
+    return (
+      <Image
+        src={project.image}
+        alt={project.title}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-105"
+        onError={() => setImageError(true)}
+      />
+    )
+  }
+
+  return (
+    <div className="h-full w-full flex items-center justify-center relative bg-primary/10">
+      <div className="absolute inset-0 opacity-[0.15] [background-image:radial-gradient(circle_at_1px_1px,currentColor_1px,transparent_0)] [background-size:16px_16px] text-primary" />
+      <span className="relative text-2xl font-black tracking-tight text-primary/70 px-6 text-center">
+        {project.title.split(' ').slice(0, 2).join(' ')}
+      </span>
+    </div>
+  )
+}
+
+function ProjectActions({ project }: { project: Project }) {
+  const hasLink = project.link && project.link !== '#'
+  const hasGithub = project.github && project.github !== '#'
+
+  if (!hasLink && !hasGithub) {
+    return (
+      <span className="inline-flex items-center gap-2 text-white/80 text-xs font-semibold uppercase tracking-wider">
+        <Lock size={14} />
+        Projet privé
+      </span>
+    )
+  }
+
+  return (
+    <div className="flex items-center gap-3">
+      {hasLink && (
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Voir le projet"
+          onClick={(e) => e.stopPropagation()}
+          className="p-3 bg-white text-black rounded-full hover:scale-110 transition-transform duration-200"
+        >
+          <ExternalLink size={17} />
+        </a>
+      )}
+      {hasGithub && (
+        <a
+          href={project.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Voir le code"
+          onClick={(e) => e.stopPropagation()}
+          className="p-3 bg-white text-black rounded-full hover:scale-110 transition-transform duration-200"
+        >
+          <Github size={17} />
+        </a>
+      )}
+    </div>
+  )
+}
+
+function FeaturedProjectCard({ project, isVisible }: { project: Project; isVisible: boolean }) {
+  return (
+    <div
+      className={`group grid grid-cols-1 lg:grid-cols-2 bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 mb-6 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+      }`}
+    >
+      <div className="relative h-64 lg:h-auto overflow-hidden">
+        <ProjectThumb project={project} />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent lg:bg-gradient-to-r lg:from-black/60 lg:via-black/0 lg:to-transparent" />
+        <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 bg-primary text-primary-foreground rounded-full text-[10px] font-black uppercase tracking-widest">
+          <Sparkles size={12} />
+          Projet phare
+        </div>
+      </div>
+      <div className="p-8 lg:p-10 flex flex-col justify-center gap-5">
+        <div>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-primary/70">
+            {project.category === 'pro' ? 'Professionnel' : 'Personnel'}
+          </span>
+          <h3 className="text-2xl sm:text-3xl font-bold text-foreground mt-2 group-hover:text-primary transition-colors">
+            {project.title}
+          </h3>
+        </div>
+        <p className="text-foreground/60 leading-relaxed">{project.description}</p>
+        <TechPills technologies={project.technologies} limit={6} />
+        <div className="flex items-center gap-3 pt-2">
+          {(project.link && project.link !== '#') || (project.github && project.github !== '#') ? (
+            <>
+              {project.link && project.link !== '#' && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-full text-sm font-semibold hover:bg-primary/90 transition-colors"
+                >
+                  <ExternalLink size={16} />
+                  Voir le projet
+                </a>
+              )}
+              {project.github && project.github !== '#' && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-card border border-border text-foreground rounded-full text-sm font-semibold hover:border-primary/40 transition-colors"
+                >
+                  <Github size={16} />
+                  Code
+                </a>
+              )}
+            </>
+          ) : (
+            <span className="inline-flex items-center gap-2 text-foreground/40 text-xs font-medium italic">
+              <Lock size={14} />
+              Projet professionnel privé
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const [isVisible, setIsVisible] = useState(false)
-  const [imageError, setImageError] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -166,80 +339,40 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <div
       ref={ref}
-      className={`group relative bg-background border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden hover:border-gray-400 dark:hover:border-gray-600 transition-all duration-500 ${
+      className={`group relative bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-500 ${
         isVisible
           ? 'opacity-100 translate-y-0'
           : 'opacity-0 translate-y-12'
       }`}
       style={{
-        transitionDelay: isVisible ? `${index * 100}ms` : '0ms',
+        transitionDelay: isVisible ? `${index * 80}ms` : '0ms',
       }}
     >
       {/* Project Image */}
-      <div
-        className="h-48 w-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-900 relative overflow-hidden"
-      >
-        {!project.image.startsWith('linear-gradient') && !imageError ? (
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            className="object-cover"
-            onError={() => setImageError(true)}
-          />
-        ) : (
-          <div
-            className="h-full w-full"
-            style={{
-              background: project.image.startsWith('linear-gradient')
-                ? project.image
-                : 'linear-gradient(135deg, #6d8278 0%, #8ba192 100%)',
-            }}
-          />
-        )}
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300" />
+      <div className="h-48 w-full relative overflow-hidden">
+        <ProjectThumb project={project} />
+
+        {/* Category badge */}
+        <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md bg-background/70 border border-border text-foreground/70">
+          {project.category === 'pro' ? 'Pro' : 'Perso'}
+        </div>
+
+        {/* Hover overlay with actions */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-5">
+          <ProjectActions project={project} />
+        </div>
       </div>
 
       {/* Project Info */}
       <div className="p-6">
-        <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">
+        <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
           {project.title}
         </h3>
-        <p className="text-foreground/60 text-sm mb-4 leading-relaxed">
+        <p className="text-foreground/60 text-sm mb-4 leading-relaxed line-clamp-2">
           {project.description}
         </p>
 
-        {/* Technologies */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.technologies.map((tech) => (
-            <span
-              key={tech}
-              className="text-xs px-3 py-1 bg-gray-100 dark:bg-gray-900 text-foreground/70 rounded-full border border-gray-200 dark:border-gray-800"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        {/* Links */}
-        <div className="flex gap-3 pt-4 border-t border-gray-200 dark:border-gray-800">
-          <a
-            href={project.link}
-            className="flex items-center gap-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
-          >
-            <ExternalLink size={16} />
-            Voir le projet
-          </a>
-          {project.github && (
-            <a
-              href={project.github}
-              className="flex items-center gap-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
-            >
-              <Github size={16} />
-              Code
-            </a>
-          )}
-        </div>
+        <TechPills technologies={project.technologies} />
       </div>
     </div>
   )
@@ -248,6 +381,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 export function Projects() {
   const [isVisible, setIsVisible] = useState(false)
   const [showAll, setShowAll] = useState(false)
+  const [activeFilter, setActiveFilter] = useState<'all' | Category>('all')
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -265,7 +399,19 @@ export function Projects() {
     return () => observer.disconnect()
   }, [])
 
-  const displayedProjects = showAll ? projects : projects.slice(0, 3)
+  const proCount = projects.filter((p) => p.category === 'pro').length
+  const persoCount = projects.filter((p) => p.category === 'perso').length
+
+  const filteredProjects =
+    activeFilter === 'all' ? projects : projects.filter((p) => p.category === activeFilter)
+
+  const [featured, ...rest] = filteredProjects
+  const displayedRest = showAll ? rest : rest.slice(0, INITIAL_COUNT - 1)
+
+  const handleFilter = (filter: 'all' | Category) => {
+    setActiveFilter(filter)
+    setShowAll(false)
+  }
 
   return (
     <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
@@ -273,12 +419,16 @@ export function Projects() {
         {/* Section Header */}
         <div
           ref={ref}
-          className={`mb-16 transition-all duration-700 ${
+          className={`mb-10 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-primary dark:text-foreground mb-4">
-            Mes Projets
+          <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 bg-primary/10 rounded-full border border-primary/20">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            <span className="text-[10px] font-black uppercase tracking-widest text-primary">Portfolio</span>
+          </div>
+          <h2 className="text-4xl sm:text-6xl font-bold text-foreground mb-6 tracking-tight">
+            Mes <span className="text-primary/50 dark:text-foreground/40 font-light">Projets</span>
           </h2>
           <p className="text-lg text-foreground/60 max-w-2xl">
             Découvrez une sélection de mes récents projets et réalisations.
@@ -286,24 +436,46 @@ export function Projects() {
           </p>
         </div>
 
+        {/* Filter Tabs */}
+        <div className="flex flex-wrap gap-2 mb-10">
+          {[
+            { key: 'all' as const, label: 'Tous', count: projects.length },
+            { key: 'pro' as const, label: 'Professionnel', count: proCount },
+            { key: 'perso' as const, label: 'Personnel', count: persoCount },
+          ].map((filter) => (
+            <button
+              key={filter.key}
+              onClick={() => handleFilter(filter.key)}
+              className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider border transition-all duration-200 ${
+                activeFilter === filter.key
+                  ? 'bg-primary text-primary-foreground border-primary'
+                  : 'bg-card text-foreground/60 border-border hover:border-primary/40 hover:text-foreground'
+              }`}
+            >
+              {filter.label} <span className="opacity-60">({filter.count})</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Featured Project */}
+        {featured && <FeaturedProjectCard project={featured} isVisible={isVisible} />}
+
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {displayedProjects.map((project, index) => (
+          {displayedRest.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
 
         {/* View More Button */}
-        {projects.length > 3 && (
+        {rest.length > INITIAL_COUNT - 1 && (
           <div className="mt-16 flex justify-center">
             <button
               onClick={() => setShowAll(!showAll)}
-              className="group relative px-8 py-3 bg-primary text-primary-foreground font-medium rounded-full overflow-hidden transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 hover:scale-105 active:scale-95"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-card border border-border text-foreground font-semibold rounded-full transition-all duration-300 hover:border-primary/40 hover:text-primary hover:-translate-y-0.5 active:translate-y-0"
             >
-              <span className="relative z-10">
-                {showAll ? 'Voir moins' : 'Voir plus'}
-              </span>
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              {showAll ? 'Voir moins' : 'Voir plus de projets'}
+              {showAll ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
             </button>
           </div>
         )}

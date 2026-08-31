@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Mail, Linkedin, Github, Facebook } from 'lucide-react'
+import { Mail, Github, Phone, MapPin } from 'lucide-react'
 import emailjs from '@emailjs/browser'
 import Swal from 'sweetalert2'
 
@@ -69,7 +69,7 @@ export function Contact() {
           icon: 'success',
           title: 'Message envoyé !',
           text: 'Merci de m\'avoir contacté. Je vous répondrai dès que possible.',
-          confirmButtonColor: '#8ba192',
+          confirmButtonColor: '#7c3aed',
         })
         setFormData({ name: '', email: '', message: '' })
       }
@@ -79,7 +79,7 @@ export function Contact() {
         icon: 'error',
         title: 'Erreur',
         text: "Une erreur est survenue lors de l'envoi du message. Veuillez réessayer plus tard.",
-        confirmButtonColor: '#8ba192',
+        confirmButtonColor: '#3f6d52',
       })
     } finally {
       setIsSending(false)
@@ -93,19 +93,9 @@ export function Contact() {
       label: 'Email',
     },
     {
-      icon: Linkedin,
-      href: 'https://linkedin.com',
-      label: 'LinkedIn',
-    },
-    {
       icon: Github,
-      href: 'https://github.com',
+      href: 'https://github.com/thonny3',
       label: 'GitHub',
-    },
-    {
-      icon: Facebook,
-      href: 'https://facebook.com',
-      label: 'Facebook',
     },
   ]
 
@@ -119,8 +109,12 @@ export function Contact() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-primary dark:text-foreground mb-4">
-            Contact
+          <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 bg-primary/10 rounded-full border border-primary/20">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            <span className="text-[10px] font-black uppercase tracking-widest text-primary">Contact</span>
+          </div>
+          <h2 className="text-4xl sm:text-6xl font-bold text-foreground mb-6 tracking-tight">
+            Parlons de votre <span className="text-primary/50 dark:text-foreground/40 font-light">projet</span>
           </h2>
           <p className="text-lg text-foreground/60">
             Vous avez un projet en tête? N'hésitez pas à me contacter.
@@ -150,7 +144,7 @@ export function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 bg-input/30 border border-border rounded-lg text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-transparent transition-all"
                   placeholder="Votre nom"
                 />
               </div>
@@ -169,7 +163,7 @@ export function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 bg-input/30 border border-border rounded-lg text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-transparent transition-all"
                   placeholder="votre@email.com"
                 />
               </div>
@@ -188,7 +182,7 @@ export function Contact() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-transparent transition-all resize-none"
+                  className="w-full px-4 py-3 bg-input/30 border border-border rounded-lg text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-transparent transition-all resize-none"
                   placeholder="Votre message..."
                 />
               </div>
@@ -216,24 +210,56 @@ export function Contact() {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
-            <div className="space-y-8">
+            <div className="space-y-4">
               {/* Email */}
-              <div>
-                <h3 className="text-lg font-bold text-foreground mb-2">Email</h3>
-                <a
-                  href="mailto:randrianasolothonny3@gmail.com"
-                  className="text-foreground/60 hover:text-foreground transition-colors"
-                >
-                 randrianasolothonny3@gmail.com
-                </a>
+              <div className="flex items-start gap-4 p-5 bg-card border border-border rounded-2xl hover:border-primary/30 transition-colors">
+                <div className="p-2.5 bg-primary/10 rounded-xl text-primary flex-shrink-0">
+                  <Mail size={18} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-foreground mb-1">Email</h3>
+                  <a
+                    href="mailto:randrianasolothonny3@gmail.com"
+                    className="text-foreground/60 hover:text-primary transition-colors text-sm"
+                  >
+                    randrianasolothonny3@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              {/* Phone */}
+              <div className="flex items-start gap-4 p-5 bg-card border border-border rounded-2xl hover:border-primary/30 transition-colors">
+                <div className="p-2.5 bg-primary/10 rounded-xl text-primary flex-shrink-0">
+                  <Phone size={18} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-foreground mb-1">Téléphone</h3>
+                  <a
+                    href="tel:+261349165158"
+                    className="text-foreground/60 hover:text-primary transition-colors text-sm"
+                  >
+                    +261 34 91 651 58
+                  </a>
+                </div>
+              </div>
+
+              {/* Location */}
+              <div className="flex items-start gap-4 p-5 bg-card border border-border rounded-2xl hover:border-primary/30 transition-colors">
+                <div className="p-2.5 bg-primary/10 rounded-xl text-primary flex-shrink-0">
+                  <MapPin size={18} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-foreground mb-1">Localisation</h3>
+                  <p className="text-foreground/60 text-sm">Tanambao, Fianarantsoa, Madagascar</p>
+                </div>
               </div>
 
               {/* Social Links */}
-              <div>
-                <h3 className="text-lg font-bold text-foreground mb-4">
+              <div className="flex items-center justify-between gap-4 p-5 bg-card border border-border rounded-2xl">
+                <h3 className="text-sm font-bold text-foreground">
                   Me suivre
                 </h3>
-                <div className="flex gap-4">
+                <div className="flex gap-3">
                   {socialLinks.map((social) => {
                     const Icon = social.icon
                     return (
@@ -241,9 +267,9 @@ export function Contact() {
                         key={social.label}
                         href={social.href}
                         aria-label={social.label}
-                        className="p-3 bg-gray-100 dark:bg-gray-900 text-foreground rounded-lg border border-gray-200 dark:border-gray-800 hover:border-foreground/30 hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-200 transform hover:scale-110 active:scale-95"
+                        className="p-2.5 bg-primary/5 text-foreground rounded-lg border border-border hover:border-primary/40 hover:bg-primary/10 hover:text-primary transition-all duration-200 transform hover:scale-110 active:scale-95"
                       >
-                        <Icon size={20} />
+                        <Icon size={18} />
                       </a>
                     )
                   })}
@@ -251,11 +277,14 @@ export function Contact() {
               </div>
 
               {/* Availability */}
-              <div>
-                <h3 className="text-lg font-bold text-foreground mb-2">
-                  Disponibilité
-                </h3>
-                <p className="text-foreground/60">
+              <div className="p-5 bg-primary/10 border border-primary/20 rounded-2xl">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  <h3 className="text-sm font-bold text-foreground">
+                    Disponibilité
+                  </h3>
+                </div>
+                <p className="text-foreground/60 text-sm leading-relaxed">
                   Actuellement ouvert à de nouveaux projets et opportunités.
                   N'hésitez pas à me contacter pour discuter de votre projet.
                 </p>

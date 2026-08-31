@@ -28,7 +28,7 @@ export function Header() {
       setScrollProgress(scrolled)
 
       // Update active section
-      const sections = ['hero', 'about', 'projects', 'skills', 'experience', 'contact']
+      const sections = ['hero', 'projects', 'skills', 'experience', 'about', 'contact']
       const current = sections.find(section => {
         const element = document.getElementById(section)
         if (element) {
@@ -62,10 +62,10 @@ export function Header() {
 
   const navItems = [
     { label: 'Accueil', id: 'hero' },
-    { label: 'À propos', id: 'about' },
     { label: 'Projets', id: 'projects' },
     { label: 'Compétences', id: 'skills' },
     { label: 'Expérience', id: 'experience' },
+    { label: 'À propos', id: 'about' },
   ]
 
   return (
@@ -104,8 +104,8 @@ export function Header() {
               <span className="text-lg font-bold tracking-tight leading-none">
                 J.M. Thonny
               </span>
-              <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-primary opacity-60 group-hover:opacity-100 transition-opacity">
-                Développeur Front-End
+              <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-primary opacity-60 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                Front-End & Full-Stack
               </span>
             </div>
           </div>
@@ -143,7 +143,7 @@ export function Header() {
 
               <button
                 onClick={() => scrollToSection('contact')}
-                className="ml-2 pr-2 pl-5 py-2 bg-primary text-primary-foreground rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center gap-3"
+                className="ml-2 pr-2 pl-5 py-2 bg-primary text-primary-foreground rounded-xl text-sm font-semibold hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center gap-3"
               >
                 Me contacter
                 <div className="p-1.5 bg-primary-foreground/10 rounded-lg">

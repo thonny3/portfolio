@@ -7,8 +7,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Portfolio | Développeur Web',
-  description: 'Portfolio professionnel - Développeur Web & Logiciel. Découvrez mes projets et compétences.',
+  title: 'Randrianasolo Jean Marc Thonny | Développeur Front-End & Full-Stack',
+  description: "Portfolio de Randrianasolo Jean Marc Thonny, développeur Front-End (React, Next.js) à tendance Full-Stack basé à Fianarantsoa, Madagascar. Découvrez mes projets, compétences et parcours.",
   generator: 'v0.app',
   icons: {
     icon: [

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Briefcase, Calendar } from 'lucide-react'
+import { Briefcase, Calendar, GraduationCap } from 'lucide-react'
 
 interface Experience {
   id: number
@@ -17,24 +17,22 @@ const experiences: Experience[] = [
     id: 1,
     company: 'Entreprise Système Numérique UN-IT, Fianarantsoa',
     position: 'Développeur Front-End',
-    period: '2025 - Présent',
+    period: '2024 - Présent',
     isLatest: true,
-    description: "Développement et amélioration continue d'applications web métier. Conception d'interfaces performantes et accessibles avec React.js/Next.js, optimisation de l'expérience utilisateur.",
+    description: "Développement d'interfaces web modernes et responsives avec React.js, Next.js et Vue.js. Création de composants réutilisables, intégration d'API REST et application des méthodologies Agile/Scrum avec revues de code en équipe.",
   },
   {
     id: 2,
-    company: 'Entreprise Système Numérique UN-IT, Fianarantsoa',
+    company: 'UN-IT, Fianarantsoa (Stage de fin d\'études)',
     position: 'Développeur Front-End',
-    period: '2024 - 2025',
-    description: "Participation au développement de plateformes web. Intégration d'API REST, création de composants UI réutilisables et mise en place de bonnes pratiques Agile.",
-  },
-  {
-    id: 3,
-    company: 'UN-IT, Fianarantsoa (Stage)',
-    position: 'Stagiaire Développeur Front-End',
     period: '2023 - 2024',
-    description: "Conception d'une plateforme de consultation en ligne. Utilisation de React.js, Node.js et MySQL pour la gestion des rendez-vous et visioconférences.",
+    description: "Conception et réalisation d'une plateforme de consultation en ligne (prise de rendez-vous, visioconférence/chat, gestion des utilisateurs) avec React.js, Node.js, MySQL, Tailwind CSS et WebSockets.",
   },
+]
+
+const education = [
+  { degree: 'Master II en Informatique', school: "École Nationale d'Informatique — Université de Fianarantsoa", period: '2024 - 2025' },
+  { degree: 'Licence Professionnelle en Informatique', school: "École Nationale d'Informatique — Université de Fianarantsoa", period: '2022 - 2023' },
 ]
 
 function ExperienceItem({ experience, index, isVisible }: { experience: Experience, index: number, isVisible: boolean }) {
@@ -102,7 +100,7 @@ export function Experience() {
              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
              <span className="text-[10px] font-black uppercase tracking-widest text-primary">Carrière</span>
           </div>
-          <h2 className="text-4xl sm:text-6xl font-bold text-primary dark:text-foreground mb-6 tracking-tight">
+          <h2 className="text-4xl sm:text-6xl font-bold text-foreground mb-6 tracking-tight">
             Parcours <span className="text-primary/50 dark:text-foreground/40 font-light">Professionnel</span>
           </h2>
         </div>
@@ -116,6 +114,27 @@ export function Experience() {
               isVisible={isVisible}
             />
           ))}
+        </div>
+
+        {/* Formation */}
+        <div
+          className={`mt-8 pt-8 border-t border-foreground/10 transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <h3 className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.4em] text-foreground/30 mb-6">
+            <GraduationCap size={14} className="text-primary" />
+            Formation
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {education.map((edu) => (
+              <div key={edu.degree} className="p-5 bg-card/40 border border-border rounded-xl">
+                <p className="text-sm font-bold text-foreground">{edu.degree}</p>
+                <p className="text-xs text-foreground/50 mt-1">{edu.school}</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-primary/70 mt-2">{edu.period}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -33,8 +33,8 @@ export function Hero() {
     >
       {/* 1. Subtle Professional Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[140px] opacity-50" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[120px] opacity-30" />
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[140px] opacity-50" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[120px] opacity-40" />
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay" />
       </div>
 
@@ -46,20 +46,34 @@ export function Hero() {
            
             
             <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold tracking-tight text-foreground leading-[1.1]">
-                RANDRIANASOLO  <br />
+                <span className="text-primary">RANDRIANASOLO</span>  <br />
               <span className="text-foreground/40 font-light">Jean Marc Thonny</span>
             </h1>
-            
-            <div className="inline-block px-4 py-2 bg-foreground/5 border border-foreground/10 rounded-lg">
+
+            <div className="inline-block px-4 py-2 bg-primary/5 border border-primary/10 rounded-lg">
               <span className="text-lg sm:text-xl font-medium text-foreground/80  italic tracking-tight">
-                Développeur <span className="text-primary font-bold">Front-End</span>
+                Développeur <span className="text-primary font-bold">Front-End</span> & Full-Stack
               </span>
             </div>
           </div>
 
           <p className="max-w-xl text-lg text-foreground/60 leading-relaxed font-medium">
-            Expert en création d'expériences numériques de haute précision. Je combine rigueur technique et sensibilité esthétique pour donner vie à vos projets les plus ambitieux.
+            Ingénieur informatique spécialisé en React.js / Next.js, avec une solide maîtrise du back-end (Node.js, Laravel, bases de données). Je combine rigueur technique et sensibilité esthétique pour donner vie à des produits web performants et soignés.
           </p>
+
+          {/* Quick Stats */}
+          <div className="flex flex-wrap gap-8 sm:gap-10">
+            {[
+              { value: '3+', label: 'Ans d’expérience' },
+              { value: '14+', label: 'Projets réalisés' },
+              { value: '15+', label: 'Technologies maîtrisées' },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <p className="text-3xl font-black text-foreground leading-none">{stat.value}</p>
+                <p className="text-xs font-medium text-foreground/50 mt-1">{stat.label}</p>
+              </div>
+            ))}
+          </div>
 
           <div className="flex flex-wrap gap-6 items-center pt-4">
              <button
@@ -81,8 +95,8 @@ export function Hero() {
             </a>
             
             <div className="flex gap-5 items-center pl-4 border-l border-foreground/10">
-              <a href="#" className="p-2 text-foreground/40 hover:text-primary transition-colors hover:scale-110"><Github size={22} /></a>
-              <a href="#" className="p-2 text-foreground/40 hover:text-primary transition-colors hover:scale-110"><Linkedin size={22} /></a>
+              <a href="https://github.com/thonny3" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="p-2 text-foreground/40 hover:text-primary transition-colors hover:scale-110"><Github size={22} /></a>
+              <a href="#" aria-label="LinkedIn" className="p-2 text-foreground/40 hover:text-primary transition-colors hover:scale-110"><Linkedin size={22} /></a>
             </div>
           </div>
         </div>
