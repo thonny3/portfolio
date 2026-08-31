@@ -69,7 +69,7 @@ export function Contact() {
           icon: 'success',
           title: 'Message envoyé !',
           text: 'Merci de m\'avoir contacté. Je vous répondrai dès que possible.',
-          confirmButtonColor: '#7c3aed',
+          confirmButtonColor: '#ea580c',
         })
         setFormData({ name: '', email: '', message: '' })
       }

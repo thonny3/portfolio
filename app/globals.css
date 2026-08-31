@@ -4,74 +4,74 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #fdfcff;
-  --foreground: oklch(0.27 0.03 296);
+  --background: #fdfaf7;
+  --foreground: oklch(0.28 0.02 50);
   --card: #ffffff;
-  --card-foreground: oklch(0.27 0.03 296);
+  --card-foreground: oklch(0.28 0.02 50);
   --popover: #ffffff;
-  --popover-foreground: oklch(0.27 0.03 296);
-  --primary: #7c3aed;
+  --popover-foreground: oklch(0.28 0.02 50);
+  --primary: #ea580c;
   --primary-foreground: #ffffff;
-  --secondary: oklch(0.94 0.02 300);
-  --secondary-foreground: oklch(0.27 0.03 296);
-  --muted: oklch(0.96 0.012 300);
-  --muted-foreground: oklch(0.52 0.03 296);
-  --accent: #c026d3;
+  --secondary: oklch(0.94 0.025 60);
+  --secondary-foreground: oklch(0.28 0.02 50);
+  --muted: oklch(0.96 0.015 60);
+  --muted-foreground: oklch(0.52 0.03 50);
+  --accent: #d97706;
   --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.9 0.02 300);
-  --input: oklch(0.96 0.015 300);
-  --ring: #7c3aed;
-  --chart-1: #7c3aed;
-  --chart-2: #c026d3;
+  --border: oklch(0.9 0.025 60);
+  --input: oklch(0.96 0.018 60);
+  --ring: #ea580c;
+  --chart-1: #ea580c;
+  --chart-2: #d97706;
   --chart-3: oklch(0.6 0.118 184.704);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --radius: 0.625rem;
   --sidebar: #ffffff;
-  --sidebar-foreground: oklch(0.27 0.03 296);
-  --sidebar-primary: #7c3aed;
+  --sidebar-foreground: oklch(0.28 0.02 50);
+  --sidebar-primary: #ea580c;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: oklch(0.96 0.012 300);
-  --sidebar-accent-foreground: oklch(0.27 0.03 296);
-  --sidebar-border: oklch(0.9 0.02 300);
-  --sidebar-ring: #7c3aed;
+  --sidebar-accent: oklch(0.96 0.015 60);
+  --sidebar-accent-foreground: oklch(0.28 0.02 50);
+  --sidebar-border: oklch(0.9 0.025 60);
+  --sidebar-ring: #ea580c;
 }
 
 .dark {
-  --background: oklch(0.16 0.025 296);
-  --foreground: #f6f3ff;
-  --card: oklch(0.21 0.028 296);
-  --card-foreground: #f6f3ff;
-  --popover: oklch(0.21 0.028 296);
-  --popover-foreground: #f6f3ff;
-  --primary: #a78bfa;
-  --primary-foreground: #1e1033;
-  --secondary: oklch(0.27 0.03 296);
-  --secondary-foreground: #f6f3ff;
-  --muted: oklch(0.24 0.028 296);
-  --muted-foreground: oklch(0.72 0.025 300);
-  --accent: #e879f9;
-  --accent-foreground: #1e1033;
+  --background: oklch(0.17 0.025 45);
+  --foreground: #fff7ed;
+  --card: oklch(0.22 0.03 45);
+  --card-foreground: #fff7ed;
+  --popover: oklch(0.22 0.03 45);
+  --popover-foreground: #fff7ed;
+  --primary: #fb923c;
+  --primary-foreground: #2a1206;
+  --secondary: oklch(0.28 0.03 45);
+  --secondary-foreground: #fff7ed;
+  --muted: oklch(0.25 0.028 45);
+  --muted-foreground: oklch(0.72 0.025 55);
+  --accent: #fbbf24;
+  --accent-foreground: #2a1206;
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.32 0.035 296);
-  --input: oklch(0.24 0.028 296);
-  --ring: #a78bfa;
-  --chart-1: #a78bfa;
-  --chart-2: #e879f9;
+  --border: oklch(0.33 0.035 45);
+  --input: oklch(0.25 0.028 45);
+  --ring: #fb923c;
+  --chart-1: #fb923c;
+  --chart-2: #fbbf24;
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.21 0.028 296);
-  --sidebar-foreground: #f6f3ff;
-  --sidebar-primary: #a78bfa;
-  --sidebar-primary-foreground: #1e1033;
-  --sidebar-accent: oklch(0.27 0.03 296);
-  --sidebar-accent-foreground: #f6f3ff;
-  --sidebar-border: oklch(0.32 0.035 296);
-  --sidebar-ring: #a78bfa;
+  --sidebar: oklch(0.22 0.03 45);
+  --sidebar-foreground: #fff7ed;
+  --sidebar-primary: #fb923c;
+  --sidebar-primary-foreground: #2a1206;
+  --sidebar-accent: oklch(0.28 0.03 45);
+  --sidebar-accent-foreground: #fff7ed;
+  --sidebar-border: oklch(0.33 0.035 45);
+  --sidebar-ring: #fb923c;
 }
 
 @theme inline {
@@ -230,10 +230,10 @@
 
   .bg-mesh {
     background-image:
-      radial-gradient(at 0% 0%, oklch(0.6 0.15 300 / 0.16) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, oklch(0.65 0.18 320 / 0.14) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, oklch(0.6 0.15 300 / 0.14) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, oklch(0.7 0.1 320 / 0.1) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, oklch(0.7 0.15 50 / 0.16) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, oklch(0.72 0.16 60 / 0.14) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, oklch(0.7 0.15 50 / 0.14) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, oklch(0.75 0.1 60 / 0.1) 0px, transparent 50%);
   }
 
   @keyframes aurora {

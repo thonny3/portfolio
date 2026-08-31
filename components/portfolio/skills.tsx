@@ -79,7 +79,7 @@ const skillCategories: SkillCategory[] = [
       { name: 'Git / GitHub', icon: <SiGit />, color: '#F05032', level: 'Expert' },
       { name: 'Docker', icon: <SiDocker />, color: '#2496ED', level: 'Intermédiaire' },
       { name: 'Kubernetes', icon: <SiKubernetes />, color: '#326CE5', level: 'Notions' },
-      { name: 'Agile / Scrum', icon: <Workflow />, color: '#7c3aed', level: 'Avancé' },
+      { name: 'Agile / Scrum', icon: <Workflow />, color: '#ea580c', level: 'Avancé' },
     ],
   },
 ]
